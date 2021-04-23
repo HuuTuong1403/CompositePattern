@@ -29,11 +29,15 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    private String[] items;
-    ExpandableListView expandableListView;
-    ExpandableListAdapter adapter;
-    ArrayList<String> lstTitle;
-    Map<String, List<String>> lstChild;
+    private ExpandableListView expandableListView;
+    private ExpandableListAdapter adapter;
+    private Brands brands;
+    private ArrayList<String> lstProductLines;
+    private ArrayList<ProductLines> list;
+    private ArrayList<Phone> phoneArrayList;
+    private ArrayList<String> brandsName;
+    private ProductLines productLines;
+    private Map<String, List<String>> lstChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Init();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -69,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void addDrawersItem() {
-        adapter = new ExpandedAdapter(this, lstTitle, lstChild);
+        adapter = new ExpandedAdapter(this, lstProductLines, lstChild);
         expandableListView.setAdapter(adapter);
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                getSupportActionBar().setTitle(lstTitle.get(groupPosition).toString());
+                getSupportActionBar().setTitle(lstProductLines.get(groupPosition).toString());
             }
         });
 
@@ -93,11 +98,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void Init(){
+        Phone phone = new Phone("Xiaomi", "MiA3", R.drawable.ic_smartphone, "32000$");
+        Phone phone1 = new Phone("Iphone", "12", R.drawable.ic_smartphone, "40000$");
+        phoneArrayList = new ArrayList<>();
+        phoneArrayList.add(phone);
+        phoneArrayList.add(phone1);
+        productLines = new ProductLines("Điện thoại xịn", phoneArrayList);
+    }
+
     private void genData() {
-        lstTitle = new ArrayList<>();
-        lstTitle.add("Phone");
-        List<String> childItems = Arrays.asList("ok", "file");
+        list = new ArrayList<>();
+        brands = new Brands("xịn", list);
+        brandsName = new ArrayList<>();
+        brandsName.add(brands.getBrandName());
+        list.add(productLines);
+
         lstChild = new TreeMap<>();
+        lstChild.put(list.get(0).getLineName(), brandsName);
+        lstProductLines = new ArrayList<>(lstChild.keySet());
     }
 
 
