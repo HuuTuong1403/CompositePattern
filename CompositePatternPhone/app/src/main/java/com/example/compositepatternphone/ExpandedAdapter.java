@@ -61,7 +61,6 @@ public class ExpandedAdapter extends BaseExpandableListAdapter {
         String menu = (String)getGroup(groupPosition);
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.list_menu, null);
-
         }
         TextView txtTitle = (TextView)convertView.findViewById(R.id.expandabledListMenu);
         txtTitle.setText(menu);

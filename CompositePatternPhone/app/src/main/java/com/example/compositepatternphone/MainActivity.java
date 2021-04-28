@@ -1,10 +1,12 @@
 package com.example.compositepatternphone;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Phone> phoneArrayList;
     private ArrayList<String> brandsName;
     private ProductLines productLines;
-    private Map<String, List<String>> lstChild;
+    private HashMap<String, List<String>> lstChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
         expandableListView = (ExpandableListView)findViewById(R.id.navigationmenu);
         genData();
-
         addDrawersItem();
     }
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                getSupportActionBar().setTitle(lstProductLines.get(groupPosition).toString());
+                getSupportActionBar().setTitle(lstProductLines.get(groupPosition));
             }
         });
 
@@ -109,14 +110,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void genData() {
         list = new ArrayList<>();
+        list.add(productLines);
         brands = new Brands("xịn", list);
         brandsName = new ArrayList<>();
         brandsName.add(brands.getBrandName());
-        list.add(productLines);
+        brandsName.add("2222");
 
-        lstChild = new TreeMap<>();
-        lstChild.put(list.get(0).getLineName(), brandsName);
+        List<String> lst = new ArrayList<>();
+        lst.add("1");
+        lst.add("2");
+        List<String> lst1 = new ArrayList<>();
+        lst1.add("1");
+        lstChild = new HashMap<>();
+        lstChild.put(brandsName.get(0), lst);
+        lstChild.put(brandsName.get(1), lst1);
         lstProductLines = new ArrayList<>(lstChild.keySet());
+        Log.e("AAA", lstChild.get(brandsName.get(0)) + "");
     }
 
 
