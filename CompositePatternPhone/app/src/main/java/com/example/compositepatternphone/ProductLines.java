@@ -6,6 +6,7 @@ public class ProductLines extends CatalogComponent{
     private String lineName;
     private ArrayList<Phone> phoneList;
 
+
     public ProductLines(String lineName, ArrayList<Phone> phoneList) {
         this.lineName = lineName;
         this.phoneList = phoneList;
