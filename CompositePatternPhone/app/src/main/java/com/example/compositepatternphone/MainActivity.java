@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
     private ExpandableListView expandableListView;
     private ExpandableListAdapter adapter;
+
     private Brands samsung, apple;
     private ArrayList<Phone> phonesSamsung, phonesIphone, phoneIphoneS, phoneIpad, phoneAll;
     private ProductLines samsungalaxy, iPhone, iPhoneS, iPad;
     private ArrayList<ProductLines> productLinesSamSung, productLinesIphone;
+
     private List<String> lstHeader = new ArrayList<>();
     private HashMap<String, List<String>> lstChild = new HashMap<>();
     private List<Brands> lstBrands;
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             public void onGroupCollapse(int groupPosition) {
                 getSupportActionBar().setTitle("Home");
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("key", lstBrands.get(groupPosition).getItems());
+                bundle.putSerializable("key", phoneAll);
                 FragmentPhone fragmentPhone = new FragmentPhone();
                 fragmentPhone.setArguments(bundle);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
