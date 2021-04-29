@@ -71,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
         expandableListView = (ExpandableListView)findViewById(R.id.navigationmenu);
-        addDrawersItem();
         Bundle bundle = new Bundle();
         bundle.putSerializable("key", phoneAll);
         FragmentPhone fragmentPhone = new FragmentPhone();
@@ -83,10 +81,6 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.nav_host_fragment, fragmentPhone);
         ft.commit();
 
-    }
-
-
-    private void addDrawersItem() {
         adapter = new ExpandedAdapter(this, lstHeader, lstChild);
         expandableListView.setAdapter(adapter);
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -107,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                 ft.replace(R.id.nav_host_fragment, fragmentPhone);
                 ft.commit();
-
+                drawer.closeDrawers();
                 return false;
             }
         });
@@ -130,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
                 ft.replace(R.id.nav_host_fragment, fragmentPhone);
                 ft.commit();
+                drawer.closeDrawers();
             }
         });
 
@@ -159,9 +154,11 @@ public class MainActivity extends AppCompatActivity {
 
                 ft.replace(R.id.nav_host_fragment, fragmentPhone);
                 ft.commit();
+                drawer.closeDrawers();
                 return false;
             }
         });
+
     }
 
     public void PhoneSamSung(){
