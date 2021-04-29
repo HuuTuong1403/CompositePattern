@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
     private ExpandableListView expandableListView;
     private ExpandableListAdapter adapter;
-    private Brands samsung, iphone;
-    private ArrayList<Phone> phonesSamsung, phonesIphone, phoneIphoneS, phoneAll;
-    private ProductLines samsungalaxy, iPhone, iPhoneS;
+    private Brands samsung, apple;
+    private ArrayList<Phone> phonesSamsung, phonesIphone, phoneIphoneS, phoneIpad, phoneAll;
+    private ProductLines samsungalaxy, iPhone, iPhoneS, iPad;
     private ArrayList<ProductLines> productLinesSamSung, productLinesIphone;
     private List<String> lstHeader = new ArrayList<>();
     private HashMap<String, List<String>> lstChild = new HashMap<>();
     private List<Brands> lstBrands;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putSerializable("key", samsung.getItems());
                 }
                 else{
-                    bundle.putSerializable("key", iphone.getItems());
+                    bundle.putSerializable("key", apple.getItems());
                 }
                 FragmentPhone fragmentPhone = new FragmentPhone();
                 fragmentPhone.setArguments(bundle);
@@ -146,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
                     case "iPhoneS":
                         bundle.putSerializable("key", iPhoneS.getItems());
                         break;
+                    case "iPad":
+                        bundle.putSerializable("key", iPad.getItems());
+                        break;
                 }
                 FragmentPhone fragmentPhone = new FragmentPhone();
                 fragmentPhone.setArguments(bundle);
@@ -194,6 +198,13 @@ public class MainActivity extends AppCompatActivity {
         phoneIphoneS.add(iPhone5s);
         phoneIphoneS.add(iPhone6s);
 
+        Phone iPad102 = new Phone("iPad 10.2 Inch Wifi", "32GB (Gen 8)", R.drawable.ipad102, "8.690.000₫");
+        Phone iPadAir109 = new Phone("iPad Air 10.9 Wifi", "64GB New", R.drawable.ipadair109, "14.950.000₫");
+
+        phoneIpad = new ArrayList<>();
+        phoneIpad.add(iPad102);
+        phoneIpad.add(iPadAir109);
+
         phoneAll = new ArrayList<>();
         for(Phone phone: phonesSamsung){
             phoneAll.add(phone);
@@ -202,6 +213,9 @@ public class MainActivity extends AppCompatActivity {
             phoneAll.add(phone);
         }
         for(Phone phone: phonesIphone){
+            phoneAll.add(phone);
+        }
+        for(Phone phone: phoneIpad){
             phoneAll.add(phone);
         }
     }
@@ -218,14 +232,18 @@ public class MainActivity extends AppCompatActivity {
         iPhoneS = new ProductLines("iPhoneS", phoneIphoneS);
         productLinesIphone.add(iPhoneS);
 
+        iPad = new ProductLines("iPad", phoneIpad);
+        productLinesIphone.add(iPad);
+
         samsung = new Brands("Samsung", productLinesSamSung);
-        iphone = new Brands("iPhone", productLinesIphone);
+        apple = new Brands("Apple", productLinesIphone);
+
         lstBrands = new ArrayList<>();
         lstBrands.add(samsung);
-        lstBrands.add(iphone);
+        lstBrands.add(apple);
 
         lstHeader.add(samsung.getBrandName());
-        lstHeader.add(iphone.getBrandName());
+        lstHeader.add(apple.getBrandName());
 
         List<String> productSamsung = new ArrayList<>();
         productSamsung.add(samsungalaxy.getLineName());
@@ -233,9 +251,9 @@ public class MainActivity extends AppCompatActivity {
         List<String> productiPhone = new ArrayList<>();
         productiPhone.add(iPhone.getLineName());
         productiPhone.add(iPhoneS.getLineName());
-
+        productiPhone.add(iPad.getLineName());
         lstChild.put(samsung.getBrandName(), productSamsung);
-        lstChild.put(iphone.getBrandName(), productiPhone);
+        lstChild.put(apple.getBrandName(), productiPhone);
     }
 
 
