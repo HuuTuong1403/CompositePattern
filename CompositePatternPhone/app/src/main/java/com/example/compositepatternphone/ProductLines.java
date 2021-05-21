@@ -16,18 +16,6 @@ public class ProductLines extends CatalogComponent{
         return lineName;
     }
 
-    public void setLineName(String lineName) {
-        this.lineName = lineName;
-    }
-
-    public ArrayList<Phone> getPhoneList() {
-        return phoneList;
-    }
-
-    public void setPhoneList(ArrayList<Phone> phoneList) {
-        this.phoneList = phoneList;
-    }
-
     @Override
     public ArrayList<Phone> getItems() {
         return phoneList;

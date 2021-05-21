@@ -22,26 +22,6 @@ public class Brands extends CatalogComponent {
         return brandName;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    public ArrayList<ProductLines> getProductLines() {
-        return productLines;
-    }
-
-    public void setProductLines(ArrayList<ProductLines> productLines) {
-        this.productLines = productLines;
-    }
-
-    public ArrayList<Phone> getPhoneList() {
-        return phoneList;
-    }
-
-    public void setPhoneList(ArrayList<Phone> phoneList) {
-        this.phoneList = phoneList;
-    }
-
     @Override
     public ArrayList<Phone> getItems() {
         return phoneList;
